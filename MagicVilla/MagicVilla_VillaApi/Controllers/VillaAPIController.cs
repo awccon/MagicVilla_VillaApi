@@ -43,6 +43,12 @@ namespace MagicVilla_VillaApi.Controllers
             //if(!ModelState.IsValid)
             //    return BadRequest(villaDTO);
 
+            if(VillaStore.villaList.FirstOrDefault(u=>u.Name.ToLower()==villaDTO.Name.ToLower())!=null)
+            {
+                ModelState.AddModelError("CustomError", "Villa already Exists!");
+                return BadRequest(ModelState);
+            }
+
             if (villaDTO == null)
                 return BadRequest(villaDTO);
             if (villaDTO.Id > 0)
